@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- OSM -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="map.css">
+    
+    <title>LearnSphere</title>
+    <style>
+        #map {
+            height: 90vh; /* Set a fixed height */
+            width: 100%;
+        }
+        .loc {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 1000;
+        }
+
+        .logo {
+        display: flex;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        }
+       
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav{
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: whitesmoke;
+        }
+        .container{
+            height: 60vh;
+            width: 100vw;
+            object-fit: cover;
+            display: grid;
+            
+            
+
+        }
+        main {
+            margin-top: 3rem;
+            padding: 0 5rem;
+        }
+    </style>
+</head>
+<body>
+  <nav class="navbar navbar-light bg-primary navbar-expand-md fixed-top">
+    <a href="map.html" class="navbar-brand text-white">
+        
+          <!--svg-->
+        <div class="logo">
+            <svg width="50" height="50" >
+                <div style="position: relative; width: 100%; height: 0; padding-top: 20.2000%; overflow: hidden;
+                border-radius: 100px; will-change: transform;">
+                 <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+                   src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGMZvUx5ZY&#x2F;2AxAi0KOsSKmjHn_uq1ptw&#x2F;view?embed" >
+                 </iframe>
+               </div>
+            </svg>
+            <div class="logo-text">LearnSphere</div>
+        </div>
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end align-center" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto px-5" style="text-align: center;">
+            <li class="nav-item px-2">
+                <a href="#" class="nav-link text-white " ><i class="fas fa-house"></i> Home</a>
+            </li>
+            
+            <li class="nav-item px-2">
+                <a href="#" class="nav-link text-white"><i class="fas fa-circle-info"></i> About</a>
+            </li>
+
+            <li class="nav-item px-2">
+                <a href="#" class="nav-link text-white"><i class="fas fa-user"></i> Log in</a>
+            </li>
+            <li><button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#myModal">Sign Up</button></li>
+        </ul>
+    </div>
+</nav>
+
+<!--modal sign up-->
+
+<div class="modal fade" id="myModal">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">
+                
+          <!--svg-->
+        <div class="logo">
+            <svg width="50" height="50" >
+                <div style="position: relative; width: 100%; height: 0; padding-top: 20.2000%; overflow: hidden;
+                border-radius: 100px; will-change: transform;">
+                 <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+                   src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGMZvUx5ZY&#x2F;2AxAi0KOsSKmjHn_uq1ptw&#x2F;view?embed" >
+                 </iframe>
+               </div>
+            </svg>
+            <div class="logo-text">LearnSphere</div>
+        </div>
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                <span>&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+           
+                <h2 class="text-center mb-4">Sign Up</h2>
+                <form>
+                    <div class="form-group row mb-3">
+                        <label class="col-sm-3 col-form-label" for="email">Email Address</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="email" placeholder="username@gmail.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row mb-3">
+                        <label class="col-sm-3 col-form-label" for="password">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="form-group row mb-4">
+                        <label class="col-sm-3 col-form-label" for="agree">Agree to all the agreements</label>
+                        <div class="col-sm-9">
+                            <input type="checkbox" class="form-check-input" id="agree">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col text-center">
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                        </div>
+                    </div>
+                </form>
+           
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+</div>
+</div>
+
+    </nav>
+    <main>
+        <div id="map"></div>
+    </main>
+    <footer class="footer bg-light fixed-bottom" style="text-align: center; color: blue;">
+      <div>
+          <p>&copy; LearnSphere. All rights reserved. <br> PRANAB RAI</p>
+      </div>
+  </footer>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([22, 88], 5); // Set the initial view (latitude, longitude, zoom level)
+
+        // Add the OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Define the routing control
+        L.Routing.control({
+            waypoints: [
+                L.latLng(12.98, 77.6), // Start point Bangalore to Darjeeling
+                L.latLng(27.04, 88.3)   // End point
+            ],
+            routeWhileDragging: true
+        }).addTo(map);
+    </script>
+</body>
+</html>
