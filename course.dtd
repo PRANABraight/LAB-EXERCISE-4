@@ -16,7 +16,7 @@
 <!ENTITY subs1 "Premium">
 
 <!-- Elements Definitions -->
-<!ELEMENT course (lesson+, user*, kuiz*, certificate*, feedback*)>
+<!ELEMENT course (lesson+, user*, quiz*, certificate*, feedback*)>
 
 <!-- Lesson Element -->
 <!ELEMENT lesson (title, instructor, duration, price, rating, certificate, quiz, description?)>
